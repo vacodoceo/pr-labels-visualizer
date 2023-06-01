@@ -1,12 +1,14 @@
-import { GetInsectButton } from "@/components/buttons/GetInsectButton";
-import { Header } from "./Header";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/auth-options";
+import { redirect } from "next/navigation";
 
 const Home = async () => {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/api/auth/signin");
+
   return (
     <main className="flex flex-col items-center p-8 space-y-8">
-      <Header />
-
-      <GetInsectButton />
+      PR Label Visualizer
     </main>
   );
 };
